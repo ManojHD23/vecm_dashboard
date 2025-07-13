@@ -9,18 +9,19 @@ import matplotlib.pyplot as plt
 st.set_page_config(page_title="Milk Societies VECM Dashboard", layout="wide")
 st.title("📈 Milk Production: VECM Diagnostic Dashboard")
 
-# Load Data
+# Load Data from GitHub
 @st.cache_data
-def load_data(path):
-    df = pd.read_csv(path)
+def load_data():
+    github_url = "https://raw.githubusercontent.com/ManojHD23/vecm_dashboard/main/data/milk_timeseries_cleaned.csv"
+    df = pd.read_csv(github_url)
     df['Date'] = pd.to_datetime(df['Date'], dayfirst=True)
     pivot_df = df.pivot(index='Date', columns='Name of the Society', values='Milk_Production')
     return pivot_df.dropna()
 
-# Constants
-FILE_PATH = r"C:\Users\Manoj\Desktop\waste_folder\data\milk_timeseries_cleaned.csv"
-data = load_data(FILE_PATH)
+# Load and prepare
+data = load_data()
 societies = sorted(data.columns)
+
 
 # Sidebar Inputs
 st.sidebar.header("🔧 Model Configuration")
