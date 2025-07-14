@@ -12,7 +12,7 @@ st.title("📈 Milk Production: VECM Diagnostic Dashboard")
 # Load Data from GitHub
 @st.cache_data
 def load_data():
-    github_url = "https://raw.githubusercontent.com/ManojHD23/vecm_dashboard/milk_timeseries_cleaned.csv"
+    github_url = "https://raw.githubusercontent.com/ManojHD23/vecm_dashboard/main/milk_timeseries_cleaned.csv"
     df = pd.read_csv(github_url)
     df['Date'] = pd.to_datetime(df['Date'], dayfirst=True)
     pivot_df = df.pivot(index='Date', columns='Name of the Society', values='Milk_Production')
